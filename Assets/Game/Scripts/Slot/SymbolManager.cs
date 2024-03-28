@@ -13,19 +13,24 @@ namespace CoreGames.GameName
 
         void Start()
         {
-            for (int x = 0; x < horizontalHeight; x++)
-            {
-                for (int y = 0; y < verticalHeight; y++)
-                {
-                    GameObject symbol = Instantiate(symbols[0], new Vector2(x,y), Quaternion.identity);
-                }
-            }
+            CreateSlots();
         }
 
         
         void Update()
         {
         
+        }
+
+        private void CreateSlots()
+        {
+            for (int x = 0; x < horizontalHeight; x++)
+            {
+                for (int y = 0; y < verticalHeight; y++)
+                {
+                    GameObject symbol = Instantiate(symbols[Random.Range(0, symbols.Count)], new Vector2(x, y), Quaternion.identity);
+                }
+            }
         }
     }
 }
