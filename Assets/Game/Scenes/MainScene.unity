@@ -1487,6 +1487,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   verticalHeight: 2
   horizontalHeight: 4
+  horizontalSpacing: 2
+  verticalSpacing: 2
   symbols:
   - {fileID: 6267580780735789523, guid: 5cf9b399d01fb164882ee6033ac041d2, type: 3}
   - {fileID: 8379176722022536444, guid: 975fb7fda85ecf74392b9709f26afc6e, type: 3}
@@ -1496,6 +1498,8 @@ MonoBehaviour:
   - {fileID: 986043003297327863, guid: cac14234e6560fa48b723b76a452338f, type: 3}
   - {fileID: 2639617479723666687, guid: c08653d9e70511648ba6ec262a32624a, type: 3}
   - {fileID: 7021369221339041239, guid: 625d9583a22f7dd4693674877d4089fa, type: 3}
+  firstSymbol: {fileID: 0}
+  secondSymbol: {fileID: 0}
 --- !u!1 &1234273458
 GameObject:
   m_ObjectHideFlags: 0

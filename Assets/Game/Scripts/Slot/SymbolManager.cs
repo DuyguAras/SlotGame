@@ -8,12 +8,16 @@ namespace CoreGames.GameName
     {
         [SerializeField] private int verticalHeight;
         [SerializeField] private int horizontalHeight;
+        [SerializeField] private float horizontalSpacing;
+        [SerializeField] private float verticalSpacing;
 
         [SerializeField] private List<GameObject> symbols;
 
+        [HideInInspector] public GameObject firstSymbol, secondSymbol;
+
         void Start()
         {
-            CreateSlots();
+            Slots();
         }
 
         
@@ -22,15 +26,40 @@ namespace CoreGames.GameName
         
         }
 
-        private void CreateSlots()
+        private void Slots()
         {
             for (int x = 0; x < horizontalHeight; x++)
             {
                 for (int y = 0; y < verticalHeight; y++)
                 {
-                    GameObject symbol = Instantiate(symbols[Random.Range(0, symbols.Count)], new Vector2(x, y), Quaternion.identity);
+                    Vector2 spacing = new Vector2(x * horizontalSpacing, y * verticalSpacing);
+
+                    GameObject symbol = Instantiate(symbols[Random.Range(0, symbols.Count)], spacing, Quaternion.identity);
                 }
             }
+        }
+
+        public void Combination()
+        {
+            float combinationDistance = Mathf.Abs(firstSymbol.transform.position.x - secondSymbol.transform.position.x);
+
+            if (combinationDistance <= 2)
+            {
+                Vector2 firstCombination = firstSymbol.transform.position;
+                Vector2 secondCombination = secondSymbol.transform.position;
+
+                firstSymbol.transform.position = secondCombination;
+                secondSymbol.transform.position = firstCombination;
+            }
+            else
+            {
+                Debug.Log("Too Far To Switch");
+            }
+          
+            firstSymbol = null;
+            secondSymbol = null;
+
+            Debug.Log("Clicked 2 Symbols");
         }
     }
 }
