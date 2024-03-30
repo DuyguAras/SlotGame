@@ -37,7 +37,7 @@ namespace CoreGames.GameName
                 float x = Mathf.Abs(this.transform.position.x - DistinguishAllSymbols[i].transform.position.x);
                 float y = Mathf.Abs(this.transform.position.y - DistinguishAllSymbols[i].transform.position.y);
 
-                if (x > 0)
+                if (x > 0 && this.SymbolID == DistinguishAllSymbols[i].GetComponent<SymbolCombinationManager>().SymbolID)
                 {
                     if (y == 0)
                     {
@@ -45,7 +45,7 @@ namespace CoreGames.GameName
                     }
                 }
 
-                if (y > 0)
+                if (y > 0 && this.SymbolID == DistinguishAllSymbols[i].GetComponent<SymbolCombinationManager>().SymbolID)
                 {
                     if (x == 0)
                     {
