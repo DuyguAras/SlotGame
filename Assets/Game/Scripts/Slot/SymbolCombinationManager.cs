@@ -8,9 +8,9 @@ namespace CoreGames.GameName
     {
         private GameObject slotSymbols;
 
-        [SerializeField] private int SymbolID;
-        [SerializeField] private List<GameObject> DistinguishAllSymbols;
-        [SerializeField] private List<GameObject> CloseSymbols;
+        [SerializeField] private int symbolID;
+        [SerializeField] private List<GameObject> distinguishAllSymbols;
+        [SerializeField] private List<GameObject> closeSymbols;
         public int symbolOrder;
 
         private void Awake()
@@ -26,32 +26,47 @@ namespace CoreGames.GameName
                 {
                     if (this.symbolOrder != AllSymbols.GetComponent<SymbolCombinationManager>().symbolOrder)
                     {
-                        DistinguishAllSymbols.Add(AllSymbols);
+                        distinguishAllSymbols.Add(AllSymbols);
                     }
                     
                 }
             }
 
-            for (int i = 0; i < DistinguishAllSymbols.Count; i++)
+            for (int i = 0; i < distinguishAllSymbols.Count; i++)
             {
-                float x = Mathf.Abs(this.transform.position.x - DistinguishAllSymbols[i].transform.position.x);
-                float y = Mathf.Abs(this.transform.position.y - DistinguishAllSymbols[i].transform.position.y);
+                float x = Mathf.Abs(this.transform.position.x - distinguishAllSymbols[i].transform.position.x);
+                float y = Mathf.Abs(this.transform.position.y - distinguishAllSymbols[i].transform.position.y);
 
-                if (x > 0 && this.SymbolID == DistinguishAllSymbols[i].GetComponent<SymbolCombinationManager>().SymbolID)
+                if (x > 0 && this.symbolID == distinguishAllSymbols[i].GetComponent<SymbolCombinationManager>().symbolID)
                 {
                     if (y == 0)
                     {
-                        CloseSymbols.Add(DistinguishAllSymbols[i]);
+                        closeSymbols.Add(distinguishAllSymbols[i]);
                     }
                 }
 
-                if (y > 0 && this.SymbolID == DistinguishAllSymbols[i].GetComponent<SymbolCombinationManager>().SymbolID)
+                if (y > 0 && this.symbolID == distinguishAllSymbols[i].GetComponent<SymbolCombinationManager>().symbolID)
                 {
                     if (x == 0)
                     {
-                        CloseSymbols.Add(DistinguishAllSymbols[i]);
+                        closeSymbols.Add(distinguishAllSymbols[i]);
                     }
                 }
+            }
+
+            if (closeSymbols.Count >= 2)
+            {
+                foreach (GameObject item in closeSymbols)
+                {
+                    Destroy(item);
+                }
+
+                Destroy(this.gameObject);
+            }
+            else
+            {
+                closeSymbols.Clear();
+                distinguishAllSymbols.Clear();
             }
         }
 
