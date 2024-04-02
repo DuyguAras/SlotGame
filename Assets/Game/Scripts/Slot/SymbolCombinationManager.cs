@@ -1,22 +1,16 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using DG.Tweening;
 
 namespace CoreGames.GameName
 {
     public class SymbolCombinationManager : MonoBehaviour
     {
-        private GameObject slotSymbols;
-
         [SerializeField] private int symbolID;
         [SerializeField] private List<GameObject> distinguishAllSymbols;
-        [SerializeField] private List<GameObject> closeSymbols;
+        [SerializeField] private List<GameObject> matchingSymbols;
         public int symbolOrder;
-
-        private void Awake()
-        {
-            slotSymbols = GameObject.Find("Slot_Symbols");
-        }
 
         public void SymbolControl()
         {
@@ -32,7 +26,37 @@ namespace CoreGames.GameName
                 }
             }
 
+            #region COMBINATION 1
+
+            //COMBINATION 1 | If there are more than a certain number of identical objects
+
             for (int i = 0; i < distinguishAllSymbols.Count; i++)
+            {
+                if (symbolID == distinguishAllSymbols[i].GetComponent<SymbolCombinationManager>().symbolID)
+                {
+                    matchingSymbols.Add(distinguishAllSymbols[i]);
+                }
+            }
+
+            if (matchingSymbols.Count >= 2)
+            {
+                foreach (GameObject item in matchingSymbols)
+                {
+                    MatchingAnimation(item);
+                }
+
+                matchingSymbols.Clear();
+                Debug.Log("COMBINATION 1");
+            }
+
+
+            #endregion
+
+            #region COMBINATION 2
+
+            //COMBINATION 2 | If five identical objects come together side by side
+
+            /*for (int i = 0; i < distinguishAllSymbols.Count; i++)
             {
                 float x = Mathf.Abs(this.transform.position.x - distinguishAllSymbols[i].transform.position.x);
                 float y = Mathf.Abs(this.transform.position.y - distinguishAllSymbols[i].transform.position.y);
@@ -41,46 +65,64 @@ namespace CoreGames.GameName
                 {
                     if (y == 0)
                     {
-                        closeSymbols.Add(distinguishAllSymbols[i]);
+                        matchingSymbols.Add(distinguishAllSymbols[i]);
                     }
                 }
+            }
+
+            if (matchingSymbols.Count == 4)
+            {
+                foreach (GameObject item in matchingSymbols)
+                {
+                    ScaleAndDestroy(item);
+                }
+
+                matchingSymbols.Clear();
+                Debug.Log("COMBINATION 2");
+            }*/
+
+            #endregion
+
+            #region COMBINATION 3
+
+            //COMBINATION 3 | If there are three identical objects vertically
+
+            /*for (int i = 0; i < distinguishAllSymbols.Count; i++)
+            {
+                float x = Mathf.Abs(this.transform.position.x - distinguishAllSymbols[i].transform.position.x);
+                float y = Mathf.Abs(this.transform.position.y - distinguishAllSymbols[i].transform.position.y);
 
                 if (y > 0 && this.symbolID == distinguishAllSymbols[i].GetComponent<SymbolCombinationManager>().symbolID)
                 {
                     if (x == 0)
                     {
-                        closeSymbols.Add(distinguishAllSymbols[i]);
+                        matchingSymbols.Add(distinguishAllSymbols[i]);
                     }
                 }
             }
 
-            if (closeSymbols.Count >= 2)
+            if (matchingSymbols.Count == 2)
             {
-                foreach (GameObject item in closeSymbols)
+                foreach (GameObject item in matchingSymbols)
                 {
-                    Destroy(item);
+                    ScaleAndDestroy(item);
                 }
 
-                Destroy(this.gameObject);
-            }
-            else
-            {
-                closeSymbols.Clear();
-                distinguishAllSymbols.Clear();
-            }
+                matchingSymbols.Clear();
+                Debug.Log("COMBINATION 3");
+            }*/
+
+            #endregion
         }
 
-        private void OnMouseDown()
+        private void MatchingAnimation(GameObject item)
         {
-            if (slotSymbols.GetComponent<SymbolManager>().firstSymbol == null)
-            {
-                slotSymbols.GetComponent<SymbolManager>().firstSymbol = this.gameObject;
-            }
-            else
-            {
-                slotSymbols.GetComponent<SymbolManager>().secondSymbol = this.gameObject;
-                slotSymbols.GetComponent<SymbolManager>().Combination();
-            }
+            Vector3 itemScale = item.transform.localScale;
+
+            Sequence sequence = DOTween.Sequence();
+
+            sequence.Append(item.transform.DOScale(itemScale * 1.5f, 0.25f));
+            sequence.Append(item.transform.DOScale(itemScale * 1.25f, 0.25f));
         }
     }
 }

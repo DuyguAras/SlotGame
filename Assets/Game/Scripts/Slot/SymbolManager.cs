@@ -13,22 +13,14 @@ namespace CoreGames.GameName
         private int order;
 
         [SerializeField] private List<GameObject> symbols;
+        private List<GameObject> symbolsHolder = new();
 
         [HideInInspector] public GameObject firstSymbol, secondSymbol;
 
-        void Start()
+        public void Slots()
         {
-            Slots();
-        }
+            DestroyPreviousList();
 
-        
-        void Update()
-        {
-        
-        }
-
-        private void Slots()
-        {
             for (int x = 0; x < horizontalHeight; x++)
             {
                 for (int y = 0; y < verticalHeight; y++)
@@ -36,29 +28,30 @@ namespace CoreGames.GameName
                     Vector2 spacing = new Vector2(x * horizontalSpacing, y * verticalSpacing);
 
                     GameObject symbol = Instantiate(symbols[Random.Range(0, symbols.Count)], spacing, Quaternion.identity);
+                    symbolsHolder.Add(symbol);
                     order++;
                     symbol.GetComponent<SymbolCombinationManager>().symbolOrder = order;
                 }
             }
+
+            Invoke(nameof(CombinationCheck), 2f);
         }
 
-        public void Combination()
+        private void DestroyPreviousList()
         {
-            float combinationDistance = Mathf.Abs(firstSymbol.transform.position.x - secondSymbol.transform.position.x);
-
-            if (combinationDistance <= 2)
+            if (symbolsHolder.Count > 0)
             {
-                Vector2 firstCombination = firstSymbol.transform.position;
-                Vector2 secondCombination = secondSymbol.transform.position;
+                foreach (GameObject symbol in symbolsHolder)
+                {
+                    Destroy(symbol);
+                }
 
-                firstSymbol.transform.position = secondCombination;
-                secondSymbol.transform.position = firstCombination;
+                symbolsHolder.Clear();
             }
-            else
-            {
-                Debug.Log("Too Far To Switch");
-            }
+        }
 
+        public void CombinationCheck()
+        {
             foreach (var AllSymbols in FindObjectsOfType(typeof(GameObject)) as GameObject[])
             {
                 if (AllSymbols.name == "Symbol_1(Clone)" || AllSymbols.name == "Symbol_2(Clone)" || AllSymbols.name == "Symbol_3(Clone)" || AllSymbols.name == "Symbol_4(Clone)" || AllSymbols.name == "Symbol_5(Clone)" || AllSymbols.name == "Symbol_6(Clone)" || AllSymbols.name == "Symbol_7(Clone)" || AllSymbols.name == "Symbol_8(Clone)")
@@ -67,10 +60,7 @@ namespace CoreGames.GameName
                 }
             }
 
-            firstSymbol = null;
-            secondSymbol = null;
-
-            Debug.Log("Clicked 2 Symbols");
+            Debug.Log($"Combination Check");
         }
     }
 }
