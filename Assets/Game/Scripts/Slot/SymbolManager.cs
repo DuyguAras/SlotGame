@@ -1,4 +1,4 @@
-using System.Collections;
+﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -21,16 +21,19 @@ namespace CoreGames.GameName
         {
             DestroyPreviousList();
 
-            for (int x = 0; x < horizontalHeight; x++)
+            for (int x = 0; x < verticalHeight; x++)
             {
-                for (int y = 0; y < verticalHeight; y++)
+                for (int y = 0; y < horizontalHeight; y++)
                 {
-                    Vector2 spacing = new Vector2(x * horizontalSpacing, y * verticalSpacing);
+                    Vector2 position = new Vector2(y * horizontalSpacing, x * verticalSpacing);
 
-                    GameObject symbol = Instantiate(symbols[Random.Range(0, symbols.Count)], spacing, Quaternion.identity);
+                    GameObject symbol = Instantiate(symbols[Random.Range(0, symbols.Count)], position, Quaternion.identity);
                     symbolsHolder.Add(symbol);
+
                     order++;
                     symbol.GetComponent<SymbolCombinationManager>().symbolOrder = order;
+
+                    Debug.Log($"x {x} y {y}");
                 }
             }
 

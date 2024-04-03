@@ -26,11 +26,9 @@ namespace CoreGames.GameName
                 }
             }
 
-            #region COMBINATION 1
+            #region EXAMPLE
 
-            //COMBINATION 1 | If there are more than a certain number of identical objects
-
-            for (int i = 0; i < distinguishAllSymbols.Count; i++)
+            /*for (int i = 0; i < distinguishAllSymbols.Count; i++)
             {
                 if (symbolID == distinguishAllSymbols[i].GetComponent<SymbolCombinationManager>().symbolID)
                 {
@@ -47,7 +45,33 @@ namespace CoreGames.GameName
 
                 matchingSymbols.Clear();
                 Debug.Log("COMBINATION 1");
+            }*/
+
+
+            #endregion
+
+            #region COMBINATION 1
+
+            //COMBINATION 1 | If there are more than a certain number of identical objects
+
+            /*for (int i = 0; i < distinguishAllSymbols.Count; i++)
+            {
+                if (symbolID == distinguishAllSymbols[i].GetComponent<SymbolCombinationManager>().symbolID)
+                {
+                    matchingSymbols.Add(distinguishAllSymbols[i]);
+                }
             }
+
+            if (matchingSymbols.Count >= 2)
+            {
+                foreach (GameObject item in matchingSymbols)
+                {
+                    MatchingAnimation(item);
+                }
+
+                matchingSymbols.Clear();
+                Debug.Log("COMBINATION 1");
+            }*/
 
 
             #endregion

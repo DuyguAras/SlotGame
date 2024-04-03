@@ -2125,7 +2125,7 @@ GameObject:
   - component: {fileID: 1210713060}
   - component: {fileID: 1210713061}
   m_Layer: 0
-  m_Name: Slot_Symbols
+  m_Name: Symbol_Manager
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -2173,6 +2173,53 @@ MonoBehaviour:
   - {fileID: 7021369221339041239, guid: 625d9583a22f7dd4693674877d4089fa, type: 3}
   firstSymbol: {fileID: 0}
   secondSymbol: {fileID: 0}
+--- !u!1 &1231031355
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1231031357}
+  - component: {fileID: 1231031356}
+  m_Layer: 0
+  m_Name: Combination_Manager
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &1231031356
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1231031355}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: dfce640c8a0a8bb478a62a6699aca6b1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  combinationSO:
+  - {fileID: 11400000, guid: 48cee2f2975a6ec409d64697ec282d47, type: 2}
+  - {fileID: 11400000, guid: 324ca28e58387a74fb9102955940e34c, type: 2}
+--- !u!4 &1231031357
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1231031355}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1234273458
 GameObject:
   m_ObjectHideFlags: 0
@@ -3099,3 +3146,4 @@ SceneRoots:
   - {fileID: 2100850900}
   - {fileID: 140927660}
   - {fileID: 1210713060}
+  - {fileID: 1231031357}
