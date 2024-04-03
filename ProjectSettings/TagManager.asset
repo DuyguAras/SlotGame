@@ -9,10 +9,10 @@ TagManager:
   - Default
   - TransparentFX
   - Ignore Raycast
-  - 
+  - Slot
   - Water
   - UI
-  - 
+  - Canvas
   - 
   - 
   - 
@@ -41,4 +41,10 @@ TagManager:
   m_SortingLayers:
   - name: Default
     uniqueID: 0
+    locked: 0
+  - name: BCLayer
+    uniqueID: 2676652889
+    locked: 0
+  - name: SlotLayer
+    uniqueID: 1925083513
     locked: 0
