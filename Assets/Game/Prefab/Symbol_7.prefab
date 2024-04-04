@@ -10,7 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 3856159465853710954}
   - component: {fileID: 6738374290187783244}
-  - component: {fileID: -1093864006918468616}
+  - component: {fileID: -5710086239579107858}
   m_Layer: 0
   m_Name: Symbol_7
   m_TagString: Untagged
@@ -72,7 +72,7 @@ SpriteRenderer:
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 1925083513
-  m_SortingLayer: 1
+  m_SortingLayer: 2
   m_SortingOrder: 1
   m_Sprite: {fileID: 21300000, guid: f03becc3df6a9a24ab418bb56b45ae29, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
@@ -85,7 +85,7 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
---- !u!114 &-1093864006918468616
+--- !u!114 &-5710086239579107858
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -94,10 +94,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 2639617479723666687}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 217de2116c4ea924988b35c1326b63a4, type: 3}
+  m_Script: {fileID: 11500000, guid: 4cc413c969c71ea44810f5c6f4d17906, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  symbolID: 6
-  distinguishAllSymbols: []
-  matchingSymbols: []
-  symbolOrder: 0
+  ID: 6

@@ -13,6 +13,6 @@ MonoBehaviour:
   m_Name: Combination 2
   m_EditorClassIdentifier: 
   boolRows:
-  - bools: 0100010001
   - bools: 0000000000
-  - bools: 0001000100
+  - bools: 0101010101
+  - bools: 0000000000

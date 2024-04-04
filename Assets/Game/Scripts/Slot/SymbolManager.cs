@@ -1,4 +1,4 @@
-﻿using System.Collections;
+﻿using DG.Tweening;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -6,41 +6,30 @@ namespace CoreGames.GameName
 {
     public class SymbolManager : MonoBehaviour
     {
+        [Header("Components")]
+        [SerializeField] private CombinationManager combinationManager;
+
+        [Header("Grid Settings")]
         [SerializeField] private int verticalHeight;
         [SerializeField] private int horizontalHeight;
         [SerializeField] private float horizontalSpacing;
         [SerializeField] private float verticalSpacing;
-        private int order;
 
+        [Header("Symbol")]
         [SerializeField] private List<GameObject> symbols;
         private List<GameObject> symbolsHolder = new();
 
-        [HideInInspector] public GameObject firstSymbol, secondSymbol;
+        //COMBINATIONS
+        private List<GameObject> combinationObjects = new();
 
-        public void Slots()
+        public void Spin()
         {
-            DestroyPreviousList();
-
-            for (int x = 0; x < verticalHeight; x++)
-            {
-                for (int y = 0; y < horizontalHeight; y++)
-                {
-                    Vector2 position = new Vector2(y * horizontalSpacing, x * verticalSpacing);
-
-                    GameObject symbol = Instantiate(symbols[Random.Range(0, symbols.Count)], position, Quaternion.identity);
-                    symbolsHolder.Add(symbol);
-
-                    order++;
-                    symbol.GetComponent<SymbolCombinationManager>().symbolOrder = order;
-
-                    Debug.Log($"x {x} y {y}");
-                }
-            }
-
-            Invoke(nameof(CombinationCheck), 2f);
+            DestroyPreviousSymbolList();
+            CreateSymbols();
+            CheckAllCombinations();
         }
 
-        private void DestroyPreviousList()
+        private void DestroyPreviousSymbolList()
         {
             if (symbolsHolder.Count > 0)
             {
@@ -53,17 +42,100 @@ namespace CoreGames.GameName
             }
         }
 
-        public void CombinationCheck()
+        private void CreateSymbols()
         {
-            foreach (var AllSymbols in FindObjectsOfType(typeof(GameObject)) as GameObject[])
+            for (int x = 0; x < verticalHeight; x++)
             {
-                if (AllSymbols.name == "Symbol_1(Clone)" || AllSymbols.name == "Symbol_2(Clone)" || AllSymbols.name == "Symbol_3(Clone)" || AllSymbols.name == "Symbol_4(Clone)" || AllSymbols.name == "Symbol_5(Clone)" || AllSymbols.name == "Symbol_6(Clone)" || AllSymbols.name == "Symbol_7(Clone)" || AllSymbols.name == "Symbol_8(Clone)")
+                for (int y = 0; y < horizontalHeight; y++)
                 {
-                    AllSymbols.GetComponent<SymbolCombinationManager>().SymbolControl();
+                    Vector2 position = new Vector2(y * horizontalSpacing, x * verticalSpacing);
+
+                    GameObject symbol = Instantiate(symbols[Random.Range(0, symbols.Count)], position, Quaternion.identity);
+                    symbolsHolder.Add(symbol);
                 }
             }
+        }
 
-            Debug.Log($"Combination Check");
+        private void CheckAllCombinations()
+        {
+            for (int i = 0; i < combinationManager.combinationSO.Count; i++)
+            {
+                combinationManager.GetSOCombination(i);
+                CombinationControl();
+            }
+        }
+
+        private void CombinationControl()
+        {
+            List<GameObject> combinationIndex1 = new List<GameObject>();
+            List<GameObject> combinationIndex2 = new List<GameObject>();
+            List<GameObject> combinationIndex3 = new List<GameObject>();
+
+            if (combinationObjects.Count > 0)
+            {
+                combinationObjects.Clear();
+            }
+
+            //MATCH
+            MatchingCombinationIndex(0,5, combinationIndex3);
+            MatchingCombinationIndex(5,10, combinationIndex2);
+            MatchingCombinationIndex(10,15, combinationIndex1);
+
+            //MATCH
+            CorrectCombinations(combinationManager.combinationIndex1, combinationIndex1);
+            CorrectCombinations(combinationManager.combinationIndex2, combinationIndex2);
+            CorrectCombinations(combinationManager.combinationIndex3, combinationIndex3);
+
+            //CHECK
+            SameSymbolID();
+        }
+
+        private void MatchingCombinationIndex(int startValue, int finishValue, List<GameObject> combinationIndex)
+        {
+            for (int i = startValue; i < finishValue; i++)
+            {
+                combinationIndex.Add(symbolsHolder[i]);
+            }
+        }
+
+        private void CorrectCombinations(List<bool> combinationIndexManager, List<GameObject> combinationIndex)
+        {
+            for (int i = 0; i < combinationIndexManager.Count; i++)
+            {
+                if (combinationIndexManager[i])
+                {
+                    combinationObjects.Add(combinationIndex[i]);
+                }
+            }
+        }
+
+        private void SameSymbolID()
+        {
+            if (combinationObjects.Count == 5)
+            {
+                if (combinationObjects[0].GetComponent<Symbol>().ID == combinationObjects[1].GetComponent<Symbol>().ID &&
+                   combinationObjects[0].GetComponent<Symbol>().ID == combinationObjects[2].GetComponent<Symbol>().ID &&
+                   combinationObjects[0].GetComponent<Symbol>().ID == combinationObjects[3].GetComponent<Symbol>().ID &&
+                    combinationObjects[0].GetComponent<Symbol>().ID == combinationObjects[4].GetComponent<Symbol>().ID)
+                {
+                    foreach (GameObject item in combinationObjects)
+                    {
+                        CombinationAnimation(item);
+                    }
+
+                    Debug.Log($"Combination Completed");
+                }
+            }
+        }
+
+        private void CombinationAnimation(GameObject item)
+        {
+            Vector3 itemScale = item.transform.localScale;
+
+            Sequence sequence = DOTween.Sequence();
+
+            sequence.Append(item.transform.DOScale(itemScale * 1.5f, 0.25f));
+            sequence.Append(item.transform.DOScale(itemScale * 1.25f, 0.25f));
         }
     }
 }
