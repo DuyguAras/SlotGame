@@ -1273,7 +1273,7 @@ MonoBehaviour:
       m_Calls:
       - m_Target: {fileID: 1210713061}
         m_TargetAssemblyTypeName: CoreGames.GameName.SymbolManager, GameNameScriptAssembly
-        m_MethodName: Slots
+        m_MethodName: Spin
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -2158,21 +2158,17 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5672d7a9c663a6741a3859d6786de8b4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  combinationManager: {fileID: 1231031356}
   verticalHeight: 3
   horizontalHeight: 5
   horizontalSpacing: 2
   verticalSpacing: 2
   symbols:
-  - {fileID: 6267580780735789523, guid: 5cf9b399d01fb164882ee6033ac041d2, type: 3}
   - {fileID: 8379176722022536444, guid: 975fb7fda85ecf74392b9709f26afc6e, type: 3}
   - {fileID: 2756961044176194431, guid: 52728892b8314ac45bba7a92eb5d4d9d, type: 3}
-  - {fileID: 5885211372549126970, guid: aa9e933322e3b77459aa87b965649e35, type: 3}
   - {fileID: 1519799560557510445, guid: 48b18bbe055ae474ead6c82f4ce27e72, type: 3}
   - {fileID: 986043003297327863, guid: cac14234e6560fa48b723b76a452338f, type: 3}
-  - {fileID: 2639617479723666687, guid: c08653d9e70511648ba6ec262a32624a, type: 3}
   - {fileID: 7021369221339041239, guid: 625d9583a22f7dd4693674877d4089fa, type: 3}
-  firstSymbol: {fileID: 0}
-  secondSymbol: {fileID: 0}
 --- !u!1 &1231031355
 GameObject:
   m_ObjectHideFlags: 0
@@ -2202,9 +2198,32 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: dfce640c8a0a8bb478a62a6699aca6b1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  symbolManager: {fileID: 1210713061}
   combinationSO:
   - {fileID: 11400000, guid: 48cee2f2975a6ec409d64697ec282d47, type: 2}
   - {fileID: 11400000, guid: 324ca28e58387a74fb9102955940e34c, type: 2}
+  - {fileID: 11400000, guid: 64e293facb633044f9592cfbc469ec0c, type: 2}
+  - {fileID: 11400000, guid: 6ef462e5ce4ea3848a7a1300eb6d6380, type: 2}
+  - {fileID: 11400000, guid: 8a359156aae7aee41a6f2ce51fe8da23, type: 2}
+  - {fileID: 11400000, guid: f41c66926c5644f4ba0c33d0b56aaa97, type: 2}
+  - {fileID: 11400000, guid: b63b104358e6cd74e84353a6d497f726, type: 2}
+  - {fileID: 11400000, guid: 4d73d62de36c5254c93ae73c50b059fb, type: 2}
+  - {fileID: 11400000, guid: 80fb15ffa90d372488a098d3fcaad3a6, type: 2}
+  - {fileID: 11400000, guid: c7e33ad200624cb4d91515ebd18fe8ed, type: 2}
+  - {fileID: 11400000, guid: 5c6f083fc3695364a85004d11c848531, type: 2}
+  - {fileID: 11400000, guid: c38a330491c419b4d8b2e1afeb12125b, type: 2}
+  - {fileID: 11400000, guid: 938c00fe8a4091e4196c3a9df6559ae4, type: 2}
+  - {fileID: 11400000, guid: dcd63219c03e1284fbf06d9f7da1ae53, type: 2}
+  - {fileID: 11400000, guid: 32ab4a71999084a4c86fc49600e95058, type: 2}
+  - {fileID: 11400000, guid: 33575073fed518e44aecdf93da29ed60, type: 2}
+  - {fileID: 11400000, guid: c3d7483ec7fd834458ad8918efc1399b, type: 2}
+  - {fileID: 11400000, guid: bf3d4f8d1a347e94299f44c186490476, type: 2}
+  - {fileID: 11400000, guid: 62da52258396f294fa82303050e709e4, type: 2}
+  - {fileID: 11400000, guid: 8a0d22c8560253f49b09e97150086010, type: 2}
+  - {fileID: 11400000, guid: 759f14f7aea62c64b9d4f817c7677c9d, type: 2}
+  combinationIndex1: 
+  combinationIndex2: 
+  combinationIndex3: 
 --- !u!4 &1231031357
 Transform:
   m_ObjectHideFlags: 0
