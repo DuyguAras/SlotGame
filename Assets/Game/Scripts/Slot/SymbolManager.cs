@@ -1,4 +1,5 @@
 ﻿using DG.Tweening;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -22,11 +23,16 @@ namespace CoreGames.GameName
         //COMBINATIONS
         private List<GameObject> combinationObjects = new();
 
+        [Header("Balance Manager")]
+        [SerializeField] private BalanceManager balanceManager;
+
+        private bool isBalanceImpacted;
+
         public void Spin()
         {
             DestroyPreviousSymbolList();
             CreateSymbols();
-            CheckAllCombinations();
+            CheckAllCombinations();  
         }
 
         private void DestroyPreviousSymbolList()
@@ -123,8 +129,24 @@ namespace CoreGames.GameName
                         CombinationAnimation(item);
                     }
 
+                    balanceManager.IncreaseBalance();
+
                     Debug.Log($"Combination Completed");
                 }
+                else
+                {
+                    
+
+                    if (!isBalanceImpacted)
+                    {
+                        balanceManager.DecreaseBalance();
+                        Debug.Log($"Combination not Completed");
+
+                        StartCoroutine(nameof(BalanceImpact));
+                    }
+                }
+
+
             }
         }
 
@@ -137,5 +159,13 @@ namespace CoreGames.GameName
             sequence.Append(item.transform.DOScale(itemScale * 1.5f, 0.25f));
             sequence.Append(item.transform.DOScale(itemScale * 1.25f, 0.25f));
         }
+
+        private IEnumerator BalanceImpact()
+        {
+            isBalanceImpacted = true;
+            yield return new WaitForEndOfFrame();
+            isBalanceImpacted = false;
+        }
+
     }
 }
